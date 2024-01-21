@@ -76,7 +76,67 @@ export async function consumeOrderEmailMessages(channel: Channel) {
       routingOrderKey
     );
     channel.consume(jobberQueue.queue, async (msg: ConsumeMessage | null) => {
-      console.log(JSON.parse(msg!.content.toString()));
+      const {
+        receiverEmail,
+        username,
+        template,
+        sender,
+        offerLink,
+        amount,
+        buyerUsername,
+        sellerUsername,
+        title,
+        description,
+        deliveryDays,
+        orderId,
+        orderDue,
+        requirements,
+        orderUrl,
+        originalDate,
+        newDate,
+        reason,
+        subject,
+        header,
+        type,
+        message,
+        serviceFee,
+        total,
+      } = JSON.parse(msg!.content.toString());
+      const locals: IEmailLocals = {
+        appLink: `${config.CLIENT_URL}`,
+        appIcon: 'https://i.ibb.co/Kyp2m0t/cover.png',
+        username,
+        sender,
+        offerLink,
+        amount,
+        buyerUsername,
+        sellerUsername,
+        title,
+        description,
+        deliveryDays,
+        orderId,
+        orderDue,
+        requirements,
+        orderUrl,
+        originalDate,
+        newDate,
+        reason,
+        subject,
+        header,
+        type,
+        message,
+        serviceFee,
+        total,
+      };
+
+      if (template === 'orderPlaced') {
+        await sendEmail('orderPlaced', receiverEmail, locals);
+        await sendEmail('orderReceipt', receiverEmail, locals);
+      } else {
+        await sendEmail(template, receiverEmail, locals);
+      }
+
+      channel.ack(msg!);
     });
   } catch (error) {
     log.log(
