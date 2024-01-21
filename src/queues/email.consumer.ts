@@ -18,6 +18,8 @@ export const exchangeAuthName = 'jobber-auth-notification';
 export const exchangeOrderName = 'jobber-order-notification';
 export const routingAuthKey = 'auth-email';
 export const routingOrderKey = 'order-email';
+export const queueAuthName = 'auth-email-queue';
+export const queueOrderName = 'order-email-queue';
 
 export async function consumeAuthEmailMessages(channel: Channel) {
   try {
@@ -25,9 +27,8 @@ export async function consumeAuthEmailMessages(channel: Channel) {
       channel = (await createConnection()) as Channel;
     }
 
-    const queueName = 'auth-email-queue';
     await channel.assertExchange(exchangeAuthName, 'direct');
-    const jobberQueue = await channel.assertQueue(queueName, {
+    const jobberQueue = await channel.assertQueue(queueAuthName, {
       durable: true,
       autoDelete: false,
     });
@@ -64,9 +65,8 @@ export async function consumeOrderEmailMessages(channel: Channel) {
       channel = (await createConnection()) as Channel;
     }
 
-    const queueName = 'order-email-queue';
     await channel.assertExchange(exchangeOrderName, 'direct');
-    const jobberQueue = await channel.assertQueue(queueName, {
+    const jobberQueue = await channel.assertQueue(queueOrderName, {
       durable: true,
       autoDelete: false,
     });
