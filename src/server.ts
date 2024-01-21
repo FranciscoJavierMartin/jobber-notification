@@ -11,8 +11,7 @@ import { checkConnection } from '@notifications/elasticsearch';
 import { createConnection } from '@notifications/queues/connection';
 import {
   consumeAuthEmailMessages,
-  exchangeName,
-  routingKey,
+  consumeOrderEmailMessages,
 } from '@notifications/queues/email.consumer';
 
 const SERVER_PORT: number = config.SERVER_PORT;
@@ -33,12 +32,7 @@ export function start(app: Application): void {
 async function startQueues(): Promise<void> {
   const emailChannel: Channel = (await createConnection())!;
   await consumeAuthEmailMessages(emailChannel);
-  await emailChannel.assertExchange(exchangeName, 'direct');
-  const message = JSON.stringify({
-    name: 'jobber',
-    service: 'notification service',
-  });
-  emailChannel.publish(exchangeName, routingKey, Buffer.from(message));
+  await consumeOrderEmailMessages(emailChannel);
 }
 
 function startElasticSearch(): void {
