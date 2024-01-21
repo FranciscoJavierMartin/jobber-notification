@@ -1,0 +1,15 @@
+FROM node:20-alpine:3.18
+
+ARG SERVER_PORT
+
+WORKDIR /app
+COPY package.json ./
+COPY tsconfig.json ./
+COPY .npmrc ./
+COPY src ./src
+RUN ls -a
+RUN npm install
+
+EXPOSE ${SERVER_PORT}
+
+CMD [ "npm", "run", "dev" ]
