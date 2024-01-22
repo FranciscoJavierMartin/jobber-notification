@@ -24,7 +24,7 @@ const log: Logger = winstonLogger(
 
 export function start(app: Application): void {
   startServer(app);
-  app.use('', healthRoutes);
+  app.use('', healthRoutes());
   startQueues();
   startElasticSearch();
 }
