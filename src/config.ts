@@ -23,10 +23,10 @@ class Config {
     this.SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD || '';
     this.ELASTIC_SEARCH_URL = process.env.ELASTIC_SEARCH_URL || '';
     this.SERVER_PORT = +(process.env.SERVER_PORT || 4001);
-    this.SMTP_HOST = process.env.SMTP_HOST || '';
+    this.SMTP_HOST = process.env.SMTP_HOST || 'smtp.ethereal.email';
     this.SMTP_PORT = +(process.env.SMTP_PORT || 587);
-    this.SMTP_AUTH_USER = process.env.SMTP_AUTH_USER || '';
-    this.SMTP_AUTH_PASS = process.env.SMTP_AUTH_PASS || '';
+    this.SMTP_AUTH_USER = process.env.SMTP_AUTH_USER || 'wilhelmine32@ethereal.email';
+    this.SMTP_AUTH_PASS = process.env.SMTP_AUTH_PASS || 'CUareRxHnBwJzuhjJJ';
   }
 }
 
