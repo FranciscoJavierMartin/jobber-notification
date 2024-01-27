@@ -4,11 +4,11 @@ ARG NPM_TOKEN
 ENV NPM_TOKEN=${NPM_TOKEN}
 
 WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
 COPY tsconfig.json ./
 COPY .npmrc ./
 COPY src ./src
+COPY tools ./tools
 RUN npm install -g npm@latest
 RUN npm ci && npm run build
 
@@ -19,8 +19,7 @@ ENV NPM_TOKEN=${NPM_TOKEN}
 
 WORKDIR /app
 RUN apk add --no-cache curl
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
 COPY tsconfig.json ./
 COPY .npmrc ./
 RUN npm install -g pm2 npm@latest
