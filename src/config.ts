@@ -22,7 +22,8 @@ class Config {
     this.SMTP_HOST = process.env.NOTIFICATION_SMTP_HOST || '';
     this.SMTP_PORT = +(process.env.NOTIFICATION_SMTP_PORT || 0);
     this.SENDER_EMAIL = process.env.NOTIFICATION_SENDER_EMAIL || '';
-    this.SENDER_EMAIL_PASSWORD = process.env.NOTIFICATION_SENDER_EMAIL_PASSWORD || '';
+    this.SENDER_EMAIL_PASSWORD =
+      process.env.NOTIFICATION_SENDER_EMAIL_PASSWORD || '';
   }
 }
 

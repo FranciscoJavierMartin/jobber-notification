@@ -20,7 +20,11 @@ export async function createConnection(): Promise<Channel | undefined> {
     log.info('Notification server connected to queue successfully...');
     closeConnection(channel, connection);
   } catch (error) {
-    log.error('error', 'NotificationService error createConnection() method:', error);
+    log.error(
+      'error',
+      'NotificationService error createConnection() method:',
+      error
+    );
     channel = undefined;
   }
 
