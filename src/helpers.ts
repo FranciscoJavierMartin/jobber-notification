@@ -25,8 +25,8 @@ export async function emailTemplates(
       host: config.SMTP_HOST,
       port: config.SMTP_PORT,
       auth: {
-        user: config.SMTP_AUTH_USER,
-        pass: config.SMTP_AUTH_PASS,
+        user: config.SENDER_EMAIL,
+        pass: config.SENDER_EMAIL_PASSWORD,
       },
     });
     const email: Email = new Email({

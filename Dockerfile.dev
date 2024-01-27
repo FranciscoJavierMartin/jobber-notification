@@ -1,0 +1,11 @@
+FROM node:20-alpine3.19
+
+ARG NPM_TOKEN
+ENV NPM_TOKEN=${NPM_TOKEN}
+
+WORKDIR /app
+RUN npm install
+
+EXPOSE 4001
+
+CMD [ "npm", "run", "dev" ]

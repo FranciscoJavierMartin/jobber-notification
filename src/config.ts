@@ -12,21 +12,18 @@ class Config {
   public readonly SERVER_PORT: number;
   public readonly SMTP_HOST: string;
   public readonly SMTP_PORT: number;
-  public readonly SMTP_AUTH_USER: string;
-  public readonly SMTP_AUTH_PASS: string;
 
   constructor() {
-    this.NODE_ENV = process.env.NODE_ENV || '';
-    this.CLIENT_URL = process.env.CLIENT_URL || '';
-    this.RABBITMQ_ENDPOINT = process.env.RABBITMQ_ENDPOINT || '';
-    this.SENDER_EMAIL = process.env.SENDER_EMAIL || '';
-    this.SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD || '';
-    this.ELASTIC_SEARCH_URL = process.env.ELASTIC_SEARCH_URL || '';
-    this.SERVER_PORT = +(process.env.SERVER_PORT || 4001);
-    this.SMTP_HOST = process.env.SMTP_HOST || '';
-    this.SMTP_PORT = +(process.env.SMTP_PORT || 587);
-    this.SMTP_AUTH_USER = process.env.SMTP_AUTH_USER || '';
-    this.SMTP_AUTH_PASS = process.env.SMTP_AUTH_PASS || '';
+    this.NODE_ENV = process.env.NOTIFICATION_NODE_ENV || '';
+    this.CLIENT_URL = process.env.NOTIFICATION_CLIENT_URL || '';
+    this.RABBITMQ_ENDPOINT = process.env.NOTIFICATION_RABBITMQ_ENDPOINT || '';
+    this.ELASTIC_SEARCH_URL = process.env.NOTIFICATION_ELASTIC_SEARCH_URL || '';
+    this.SERVER_PORT = 4001;
+    this.SMTP_HOST = process.env.NOTIFICATION_SMTP_HOST || '';
+    this.SMTP_PORT = +(process.env.NOTIFICATION_SMTP_PORT || 0);
+    this.SENDER_EMAIL = process.env.NOTIFICATION_SENDER_EMAIL || '';
+    this.SENDER_EMAIL_PASSWORD =
+      process.env.NOTIFICATION_SENDER_EMAIL_PASSWORD || '';
   }
 }
 
