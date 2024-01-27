@@ -1,15 +1,9 @@
 FROM node:20-alpine3.19
 
-ARG SERVER_PORT
 ARG NPM_TOKEN
 ENV NPM_TOKEN=${NPM_TOKEN}
 
 WORKDIR /app
-COPY package.json ./
-COPY tsconfig.json ./
-COPY .npmrc ./
-COPY src ./src
-RUN ls -a
 RUN npm install
 
 EXPOSE 4001

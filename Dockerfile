@@ -1,7 +1,11 @@
 FROM node:20-alpine3.19 as builder
 
+ARG NPM_TOKEN
+ENV NPM_TOKEN=${NPM_TOKEN}
+
 WORKDIR /app
 COPY package.json ./
+COPY package-lock.json ./
 COPY tsconfig.json ./
 COPY .npmrc ./
 COPY src ./src
@@ -10,9 +14,13 @@ RUN npm ci && npm run build
 
 FROM node:20-alpine3.19
 
+ARG NPM_TOKEN
+ENV NPM_TOKEN=${NPM_TOKEN}
+
 WORKDIR /app
 RUN apk add --no-cache curl
 COPY package.json ./
+COPY package-lock.json ./
 COPY tsconfig.json ./
 COPY .npmrc ./
 RUN npm install -g pm2 npm@latest
